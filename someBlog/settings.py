@@ -40,7 +40,7 @@ X_FRAME_OPTIONS = 'DENY'
 ALLOWED_HOSTS = ['*']
 
 # Enter site admins email
-ADMINS = ['fuckshit@cliptik.net']
+ADMINS = []
 
 # Email configurations
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
