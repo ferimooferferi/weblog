@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" {% load static %} href="{% static 'weblog/css/bootstrap.min.css' %}">
+
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" {% load static %} href="{% static 'weblog/css/font-awesome.min.css' %}">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" {% load static %} href="{% static 'weblog/css/swiper.min.css' %}">
+
+    <!-- Styles -->
+    <link rel="stylesheet" {% load static %} href="{% static 'weblog/style.css' %}">
+
+    <title>Document</title>
+</head>
+<body>
+        <div>
+            <h1>Book Delete</h1>
+            <form method="post">{% csrf_token %}
+                Are you sure you want to delete "{{ object.title }}" ?
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+
+<script type='text/javascript' {% load static %} src="{% static 'weblog/js/jquery.js' %}"></script>
+<script type='text/javascript' {% load static %} src="{% static 'weblog/js/swiper.min.js' %}"></script>
+<script type='text/javascript' {% load static %} src="{% static 'weblog/js/custom.js' %}"></script>
+
+</body>
+</html>

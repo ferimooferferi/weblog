@@ -1,0 +1,333 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Jaka Blog</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" {% load static %} href="{% static 'weblog/css/bootstrap.min.css' %}">
+
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" {% load static %} href="{% static 'weblog/css/font-awesome.min.css' %}">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" {% load static %} href="{% static 'weblog/css/swiper.min.css' %}">
+
+    <!-- Styles -->
+    <link rel="stylesheet" {% load static %} href="{% static 'weblog/style.css' %}">
+</head>
+<body>
+<div class="outer-container">
+    <header class="site-header">
+        <div class="top-header-bar">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6 flex align-items-center">
+                        <div class="header-bar-text d-none d-lg-block">
+                                {% if user.is_authenticated %}
+                                <p>I'm the Admin!!</p>
+                                {% else %}
+                                <p>Hello world, My name is Jaka</p>
+                                {% endif %}
+                        </div><!-- .header-bar-text -->
+                    </div><!-- .col -->
+
+                    <div class="col-12 col-lg-6 flex justify-content-between justify-content-lg-end align-items-center">
+                        <div class="header-bar-social d-none d-md-block">
+                            <ul class="flex align-items-center">
+                                <li><a href="https://pinterest.com"><i class="fa fa-pinterest"></i></a></li>
+                                <li><a href="https://facebook.com"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://twitter.com"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="https://dribble.com"><i class="fa fa-dribbble"></i></a></li>
+                                <li><a href="https://behance.com"><i class="fa fa-behance"></i></a></li>
+                                <li><a href="https://linkedin.com"><i class="fa fa-linkedin"></i></a></li>
+                            </ul>
+                        </div><!-- .header-bar-social -->
+
+                        <div class="header-bar-search d-none d-md-block">
+                            <form>
+                                <input type="search" placeholder="Search">
+                            </form>
+                        </div><!-- .header-bar-search -->
+                    </div><!-- .col -->
+                </div><!-- .row -->
+            </div><!-- .container-fluid -->
+        </div><!-- .top-header-bar -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="site-branding flex flex-column align-items-center">
+                        <h1 class="site-title"><a href="{% url 'home' %}" rel="home">Jaka</a></h1>
+                        <p class="site-description">Personal Blog</p>
+                    </div><!-- .site-branding -->
+
+                    <nav class="site-navigation">
+                        <div class="hamburger-menu d-lg-none">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div><!-- .hamburger-menu -->
+
+                        <ul class="flex-lg flex-lg-row justify-content-lg-center align-content-lg-center">
+                            <li class="current-menu-item"><a href="{% url 'home' %}">Home</a></li>
+                            <li><a href="{% url 'about' %}">about me</a></li>
+                            <li><a href="{% url 'contact' %}">Contact</a></li>
+                            {% if user.is_authenticated %}
+                            <li><a href="{% url 'logout' %}">Logout</a></li>
+                            <li><a href="{% url 'post' %}">Post Something</a></li>
+                            {% else %}
+                            <li><a href="{% url 'login' %}">login</a></li>
+                            {% endif %}
+                        </ul>
+
+                        <div class="header-bar-social d-md-none">
+                            <ul class="flex justify-content-center align-items-center">
+                                <li><a href="https://pinterest.com"><i class="fa fa-pinterest"></i></a></li>
+                                <li><a href="https://facebook.com"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://twitter.com"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="https://dribble.com"><i class="fa fa-dribbble"></i></a></li>
+                                <li><a href="https://behance.com"><i class="fa fa-behance"></i></a></li>
+                                <li><a href="https://linkedin.com"><i class="fa fa-linkedin"></i></a></li>
+                            </ul>
+                        </div><!-- .header-bar-social -->
+
+                        <div class="header-bar-search d-md-none">
+                            <form>
+                                <input type="search" placeholder="Search">
+                            </form>
+                        </div><!-- .header-bar-search -->
+                    </nav><!-- .site-navigation -->
+                </div><!-- .col -->
+            </div><!-- .row -->
+        </div><!-- .container -->
+    </header><!-- .site-header -->
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="page-header flex justify-content-center align-items-center" {% load static %} style="background-image: url('{% static 'weblog/images/patrick-tomasso-71909-unsplash.jpg' %}')">
+                    <h1>The Story</h1>
+                </div><!-- .page-header -->
+            </div><!-- .col -->
+        </div><!-- .row -->
+        <!--
+        <div class="container">
+                <div class="row">
+                    <div class="offset-lg-9 col-lg-3">
+                        <a href="#">
+                            <div class="yt-subscribe">
+                                <img {% load static %} src="{% static 'weblog/images/yt-subscribe.png' %}" alt="Youtube Subscribe">
+                                <h3>Subscribe</h3>
+                                <p>To my Youtube Channel</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>-->
+    </div><!-- .hero-section -->
+
+    <div class="container single-page blog-page">
+        <div class="row">
+            <div class="col-12">
+                <div class="content-wrap">
+                    <header class="entry-header">
+                        <div class="posted-date">
+                            {{ post.date }}
+                        </div><!-- .posted-date -->
+
+                        <h2 class="entry-title">{{ post.title }}</h2>
+                        <!--
+                        <div class="tags-links">
+                            <a href="#">#winter</a>
+                            <a href="#">#love</a>
+                            <a href="#">#snow</a>
+                            <a href="#">#january</a>
+                        </div> -->
+                        <!-- .tags-links -->
+                    </header><!-- .entry-header -->
+                    
+                    {% if post.image %}
+                    <figure class="featured-image">
+                        <img src="{{ post.image.url }}" >
+                    </figure><!-- .featured-image -->
+                    {% endif %}
+
+                    <div class="entry-content">
+                        <p>{{ post.content }}</p>    
+                    </div><!-- .entry-content -->
+                    <!--
+                    <blockquote class="blockquote-text">
+                        <p>Nullam non nisi ut dolor pellentesque eleifend. Aliquam commodo vitae risus malesuada varius. Nulla ornare lacus eu elit sollicitudin varius. Nulla aliquet ornare massa id tempor. Sed luctus dui non turpis sodales, ac tristique risus consequat. Donec tincidunt mi a magna rhoncus dapibus. Integer ut lectus euismod</p>
+                    </blockquote> -->
+                    <!-- .blockquote-text -->
+
+                    <div class="row">
+                        
+                    </div><!-- .row -->
+
+                    <footer class="entry-footer flex flex-column flex-lg-row justify-content-between align-content-start align-lg-items-center">
+                        <ul class="post-share flex align-items-center order-3 order-lg-1">
+                            <label>Share</label>
+                                <li><a href="https://pinterest.com"><i class="fa fa-pinterest"></i></a></li>
+                                <li><a href="https://facebook.com"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://twitter.com"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="https://dribble.com"><i class="fa fa-dribbble"></i></a></li>
+                                <li><a href="https://behance.com"><i class="fa fa-behance"></i></a></li>
+                                <li><a href="https://linkedin.com"><i class="fa fa-linkedin"></i></a></li>
+                        </ul><!-- .post-share -->
+
+                        <div class="comments-count order-1 order-lg-3">
+                            <a {% load weblog_extras %} href="#">{{ post.post_id|count_comments }} Comments</a>
+                        </div><!-- .comments-count -->
+
+                        {% if user.is_authenticated %}
+                        <div class="comments-count order-3 order-lg-1">
+                            <a href="{% url 'post-delete' post.pk %}"><i class="fa fa-trash"></i></a>
+                        </div>
+                        {% endif %}
+                    </footer><!-- .entry-footer -->
+                </div><!-- .content-wrap -->
+
+                <div class="content-area">
+                    <div class="post-comments">
+                        <h3 class="comments-title">Comments</h3>
+                        
+                        <ol class="comment-list">
+                            {% for comment in comment_list|slice:"5" %}
+                            {% if comment.posts.post_id == post.post_id %}
+                            <li class="comment">
+                                <div class="comment-body flex justify-content-between">
+                                    <figure class="comment-author-avatar">
+                                        <img {% load static %} src="{% static 'weblog/images/iconfinder_user_1287507.png' %}" alt="user" width="100" height="100">
+                                    </figure><!-- .comment-author-avatar -->
+
+                                    <div class="comment-wrap">
+                                        <div class="comment-author flex flex-wrap align-items-center">
+                                            <span class="fn">
+                                                <a href="#">{{ comment.commenter }}</a>
+                                            </span><!-- .fn -->
+
+                                            <span class="comment-meta">
+                                                <a href="#">{{ comment.email }}</a>
+                                            </span><!-- .comment-meta -->
+
+                                            <div class="reply">
+                                                <a href="#">Reply</a>
+                                            </div><!-- .reply -->
+                                        </div><!-- .comment-author -->
+
+                                        <p>{{ comment.comment }}</p>
+
+                                    </div><!-- .comment-wrap -->
+                                </div><!-- .comment-body -->
+                            </li><!-- .comment -->
+                            {% endif %}
+                            {% endfor %}
+                        </ol><!-- .comment-list -->
+                    </div><!-- .post-comments -->
+
+                    <div class="comments-form">
+                        <div class="comment-respond">
+                            <h3 class="comment-reply-title">Leave a reply</h3>
+                            
+                            <form class="comment-form" action="{% url 'comments' post.post_id %}" method="post">
+                                    {% csrf_token %}
+                                <input type="text" placeholder="Name" name="name">
+                                <input type="email" placeholder="Email" name="email">
+                                <textarea rows="18" cols="6" placeholder="Messages" name="message"></textarea>
+                                <input type="submit" value="Reply">
+                            </form><!-- .comment-form -->
+                        </div><!-- .comment-respond -->
+                    </div><!-- .comments-form -->
+                </div><!-- .content-area -->
+            </div><!-- .col -->
+        </div><!-- .row -->
+    </div><!-- .container -->
+</div><!-- .outer-container -->
+
+<footer class="sit-footer">
+    <div class="outer-container">
+        <div class="container-fluid">
+            <div class="row footer-recent-posts">
+                
+            </div><!-- .row -->
+        </div><!-- .container-fluid -->
+    </div><!-- .outer-container -->
+<!--
+    <div class="container-fluid">
+        <div class="row">
+            <div class="footer-instagram flex flex-wrap flex-lg-nowrap">
+                <figure>
+                    <a href="#"><img {% load static %} src="{% static 'weblog/images/a.jpg' %}" alt=""></a>
+                </figure>
+
+                <figure>
+                    <a href="#"><img {% load static %} src="{% static 'weblog/images/b.jpg' %}" alt=""></a>
+                </figure>
+
+                <figure>
+                    <a href="#"><img {% load static %} src="{% static 'weblog/images/c.jpg' %}" alt=""></a>
+                </figure>
+
+                <figure>
+                    <a href="#"><img {% load static %} src="{% static 'weblog/images/d.jpg' %}" alt=""></a>
+                </figure>
+
+                <figure>
+                    <a href="#"><img {% load static %} src="{% static 'weblog/images/e.jpg' %}" alt=""></a>
+                </figure>
+
+                <figure>
+                    <a href="#"><img {% load static %} src="{% static 'weblog/images/f.jpg' %}" alt=""></a>
+                </figure>
+
+                <figure>
+                    <a href="#"><img {% load static %} src="{% static 'weblog/images/g.jpg' %}" alt=""></a>
+                </figure>
+            </div>
+        </div>-->
+        <!-- .row -->
+    </div><!-- .container -->
+
+    <div class="footer-bar">
+        <div class="outer-container">
+            <div class="container-fluid">
+                <div class="row justify-content-between">
+                    <div class="col-12 col-md-6">
+                        <div class="footer-copyright">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </div><!-- .footer-copyright -->
+                    </div><!-- .col-xl-4 -->
+
+                    <div class="col-12 col-md-6">
+                        <div class="footer-social">
+                            <ul class="flex justify-content-center justify-content-md-end align-items-center">
+                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            </ul>
+                        </div><!-- .footer-social -->
+                    </div><!-- .col-xl-4 -->
+                </div><!-- .row -->
+            </div><!-- .container-fluid -->
+        </div><!-- .outer-container -->
+    </div><!-- .footer-bar -->
+</footer><!-- .sit-footer -->
+
+<script type='text/javascript' {% load static %} src="{% static 'weblog/js/jquery.js' %}"></script>
+<script type='text/javascript' {% load static %} src="{% static 'weblog/js/swiper.min.js' %}"></script>
+<script type='text/javascript' {% load static %} src="{% static 'weblog/js/custom.js' %}"></script>
+
+</body>
+</html>
